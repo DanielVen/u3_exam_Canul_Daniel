@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.24177917235893967 -0.9578759047154438 -0.15497284594081687 5.103737083815929
-  position 0.5480799340665831 0.25072757190876227 0.2594721472374603
+  orientation 0.5308284585251175 -0.8220893795181397 -0.20588880422045192 5.401514161378962
+  position 0.6145209479983482 0.558522913926121 0.4748367686332968
 }
 TexturedBackground {
 }
@@ -716,6 +716,7 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
+      name "dist_sensor1"
       lookupTable [
         0 0 0
         0.02 0 0
@@ -735,7 +736,7 @@ DEF OMNI_WHEELS Robot {
           }
         }
       ]
-      name "distance sensor(1)"
+      name "dist_sensor2"
       lookupTable [
         0 0 0
         0.02 0 0
@@ -746,5 +747,5 @@ DEF OMNI_WHEELS Robot {
   boundingObject USE BODY_TRANS
   physics Physics {
   }
-  controller "omni_wheels"
+  controller "u3_exam_Canul_Daniel"
 }
