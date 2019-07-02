@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.9763469059426864 -0.21529787386938798 -0.01983796268430853 0.3527591325199013
-  position 0.06393414237315015 0.5206045794367598 1.3453132818834908
+  orientation 0.24177917235893967 -0.9578759047154438 -0.15497284594081687 5.103737083815929
+  position 0.5480799340665831 0.25072757190876227 0.2594721472374603
 }
 TexturedBackground {
 }
@@ -24,9 +24,12 @@ DEF OMNI_WHEELS Robot {
           device [
             PositionSensor {
               name "encoder1"
+              resolution 0.005235983
             }
             RotationalMotor {
               name "wheel1"
+              maxVelocity 52.35
+              maxTorque 0.5931
             }
           ]
           endPoint Solid {
@@ -241,7 +244,7 @@ DEF OMNI_WHEELS Robot {
                     }
                     geometry Cylinder {
                       height 0.02
-                      radius 0.05
+                      radius 0.049999999999999996
                       subdivision 20
                     }
                   }
@@ -290,14 +293,17 @@ DEF OMNI_WHEELS Robot {
           device [
             PositionSensor {
               name "encoder2"
+              resolution 0.00523598
             }
             RotationalMotor {
               name "wheel2"
+              maxVelocity 52.35
+              maxTorque 0.5931
             }
           ]
           endPoint Solid {
             translation 0 0 0.1
-            rotation 0 0 1 0.00240581
+            rotation 0 0 1 0.00240580999995935
             children [
               DEF sr1 HingeJoint {
                 jointParameters HingeJointParameters {
@@ -489,14 +495,17 @@ DEF OMNI_WHEELS Robot {
           device [
             PositionSensor {
               name "encoder3"
+              resolution 0.00523598
             }
             RotationalMotor {
               name "wheel3"
+              maxVelocity 52.35
+              maxTorque 0.5931
             }
           ]
           endPoint Solid {
             translation 0 0 0.1
-            rotation 0 0 1 0.00390944
+            rotation 0 0 1 0.0039094400000208316
             children [
               DEF sr1 HingeJoint {
                 jointParameters HingeJointParameters {
@@ -692,6 +701,45 @@ DEF OMNI_WHEELS Robot {
             subdivision 18
           }
         }
+      ]
+    }
+    DistanceSensor {
+      translation 0.07 0.05 0.07
+      rotation 0 1 0 -0.872
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+          }
+          geometry Box {
+            size 0.02 0.01 0.01
+          }
+        }
+      ]
+      lookupTable [
+        0 0 0
+        0.02 0 0
+        5 1659 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.1 0.05 0.02
+      rotation 0 1 0 0.0872
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+          }
+          geometry Box {
+            size 0.02 0.01 0.01
+          }
+        }
+      ]
+      name "distance sensor(1)"
+      lookupTable [
+        0 0 0
+        0.02 0 0
+        5 1659 0
       ]
     }
   ]
