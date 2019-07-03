@@ -22,6 +22,8 @@
  */
 #define TIME_STEP 64
 
+#define PI 3.1416
+#define DIST_OBSTACLE 20.0
 /*
  * This is the main program.
  * The arguments of the main function can be specified by the
@@ -59,9 +61,9 @@ int main(int argc, char **argv)
    wb_position_sensor_enable(Encoder2, TIME_STEP);
    wb_position_sensor_enable(Encoder3, TIME_STEP);
       
-   float Enco1;
-   double Enco2;
-   double Enco3;
+   float Enco1=0;
+   float Enco2=0;
+   float Enco3=0;
    
    //distance sensor devices
    WbDeviceTag dist_sensorR1 = wb_robot_get_device("dist_sensor1");
@@ -70,9 +72,13 @@ int main(int argc, char **argv)
    wb_distance_sensor_enable(dist_sensorR1, TIME_STEP);
    wb_distance_sensor_enable(dist_sensorL2, TIME_STEP);
    
-   double ds_Right1;
-   double ds_Left2;
+   float ds_Right1=0;
+   float ds_Left2=0;
    
+   //Other variables
+   float compare=0;
+   float turn_right=0;
+   float turn_left=0;
    
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
@@ -130,12 +136,48 @@ int main(int argc, char **argv)
      wb_motor_set_velocity(wheel_left,-6.36);
      wb_motor_set_velocity(wheel_back,6.36);
   }
-    else if(pressed_key == 'A'){
-     wb_motor_set_velocity(wheel_right,0);
-     wb_motor_set_velocity(wheel_left,-6.36);
-     wb_motor_set_velocity(wheel_back,6.36);
+  
+
+   else if(pressed_key == 'S' ){
+    compare = Enco1 + 0.785398;
+    turn_left = 1;
   }
 
+  else if(turn_left == 1){
+
+    if(Encoder1 <= compare){
+    wb_motor_set_velocity(wheel_left, 6.36);
+    wb_motor_set_velocity(wheel_right, 6.36);
+    wb_motor_set_velocity(wheel_back, 6.36);
+  }
+  else{
+    wb_motor_set_velocity(wheel_left, 0);
+    wb_motor_set_velocity(wheel_right, 0);
+    wb_motor_set_velocity(wheel_back, 0);
+    turn_left = 0;
+  }
+
+}
+
+  else if(pressed_key == 'A' ){
+  compare = Enco1 - 0.785398;
+  turn_right = 1;
+
+  }
+   else if(turn_right == 1){
+
+    if(Encoder1 >= compare){
+    wb_motor_set_velocity(wheel_left, -6.36);
+    wb_motor_set_velocity(wheel_right, -6.36);
+    wb_motor_set_velocity(wheel_back, -6.36);
+  }
+  else{
+    wb_motor_set_velocity(wheel_left, 0);
+    wb_motor_set_velocity(wheel_right, 0);
+    wb_motor_set_velocity(wheel_back, 0);
+    turn_right = 0;
+  }
+  }
   else {
      wb_motor_set_velocity(wheel_right,0);
      wb_motor_set_velocity(wheel_left, 0);
