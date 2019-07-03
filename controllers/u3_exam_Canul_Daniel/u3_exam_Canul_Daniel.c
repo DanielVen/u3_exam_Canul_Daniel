@@ -14,6 +14,7 @@
 #include <webots/motor.h>
 #include <webots/keyboard.h>
 #include <webots/distance_sensor.h>
+#include <webots/position_sensor.h>
 
 #include <stdio.h>
 /*
@@ -48,7 +49,20 @@ int main(int argc, char **argv)
    wb_motor_set_position(wheel_right, INFINITY);
    wb_motor_set_position(wheel_left, INFINITY);
    wb_motor_set_position(wheel_back, INFINITY);
+   
+   //Encoder devices
+   WbDeviceTag Encoder1 = wb_robot_get_device("encoder1");
+   WbDeviceTag Encoder2 = wb_robot_get_device("encoder2");
+   WbDeviceTag Encoder3 = wb_robot_get_device("encoder3");
 
+   wb_position_sensor_enable(Encoder1, TIME_STEP);
+   wb_position_sensor_enable(Encoder2, TIME_STEP);
+   wb_position_sensor_enable(Encoder3, TIME_STEP);
+      
+   float Enco1;
+   double Enco2;
+   double Enco3;
+   
    //distance sensor devices
    WbDeviceTag dist_sensorR1 = wb_robot_get_device("dist_sensor1");
    WbDeviceTag dist_sensorL2 = wb_robot_get_device("dist_sensor2");
@@ -58,6 +72,7 @@ int main(int argc, char **argv)
    
    double ds_Right1;
    double ds_Left2;
+   
    
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
@@ -70,15 +85,25 @@ int main(int argc, char **argv)
      * Enter here functions to read sensor data, like:
      *  double val = wb_distance_sensor_get_value(my_sensor);
      */
+     //Distance sensor read
     ds_Right1 = wb_distance_sensor_get_value(dist_sensorR1);
-    printf("First Distance sensor %lf\n", ds_Right1);
-    pressed_key = wb_keyboard_get_key();
-  
+    printf("First Distance sensor %lf\r\n", ds_Right1);
+    
     ds_Left2 = wb_distance_sensor_get_value(dist_sensorL2);
-    printf("Second Distance sensor %lf\n", ds_Left2);
+    printf("Second Distance sensor %lf\r\n", ds_Left2);
+    
+    //Position Sensor read
+    Enco1 = wb_position_sensor_get_value(Encoder1);
+    printf("Encoder 1 value: %f\r\n", Enco1);
+    
+    Enco2 = wb_position_sensor_get_value(Encoder2);
+    printf("Encoder 2 value: %lf\r\n", Enco2);
+    
+    Enco3 = wb_position_sensor_get_value(Encoder3);
+    printf("Encoder 3 value: %lf\r\n", Enco3);
 
     /* Process sensor data here */
-
+    pressed_key=wb_keyboard_get_key();
     /*
      * Enter here functions to send actuator commands, like:
      * wb_differential_wheels_set_speed(100.0,100.0);
@@ -96,15 +121,21 @@ int main(int argc, char **argv)
 
   }
   else if(pressed_key == WB_KEYBOARD_RIGHT){
-     wb_motor_set_velocity(wheel_right,6.36);
-     wb_motor_set_velocity(wheel_left,-6.36);
-     wb_motor_set_velocity(wheel_back,-6.36);
+     wb_motor_set_velocity(wheel_right, 6.36);
+     wb_motor_set_velocity(wheel_left, 0);
+     wb_motor_set_velocity(wheel_back, -6.36);
   }
   else if(pressed_key == WB_KEYBOARD_LEFT){
-     wb_motor_set_velocity(wheel_right,-6.36);
-     wb_motor_set_velocity(wheel_left,6.36);
+     wb_motor_set_velocity(wheel_right,0);
+     wb_motor_set_velocity(wheel_left,-6.36);
      wb_motor_set_velocity(wheel_back,6.36);
   }
+    else if(pressed_key == 'A'){
+     wb_motor_set_velocity(wheel_right,0);
+     wb_motor_set_velocity(wheel_left,-6.36);
+     wb_motor_set_velocity(wheel_back,6.36);
+  }
+
   else {
      wb_motor_set_velocity(wheel_right,0);
      wb_motor_set_velocity(wheel_left, 0);
