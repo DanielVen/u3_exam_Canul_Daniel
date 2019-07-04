@@ -80,7 +80,7 @@ int main(int argc, char **argv)
    float turn_right=0;
    float turn_left=0;
    int w=0;
-   int g=0;
+   int g=1;
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
    * and leave the loop when the simulation is over
@@ -213,20 +213,20 @@ int main(int argc, char **argv)
   // bool right_obst = dist_right <= OBSTACLE_DIST;
   // bool left_obst = dist_left <= OBSTACLE_DIST;
 
-    wb_motor_set_velocity(wheel_left,  1.66);
-    wb_motor_set_velocity(wheel_right, -1.66);
+    wb_motor_set_velocity(wheel_left,  6.66);
+    wb_motor_set_velocity(wheel_right, -6.66);
     wb_motor_set_velocity(wheel_back, 0);
 
-    if(ds_Left2 < ds_Right1 && ds_Left2 < 200){
+    if(ds_Left2 < ds_Right1 && ds_Left2 < 300){
 
-     wb_motor_set_velocity(wheel_left, 1.66);
-     wb_motor_set_velocity(wheel_right, 0);
-     wb_motor_set_velocity(wheel_back, -1.66);
+     wb_motor_set_velocity(wheel_left, 0);
+     wb_motor_set_velocity(wheel_right,-6.66);
+     wb_motor_set_velocity(wheel_back, 6.66);
     }
-    else if(ds_Left2 > ds_Right1 && ds_Right1 < 200){
-     wb_motor_set_velocity(wheel_left, -1.66);
-     wb_motor_set_velocity(wheel_right, 0);
-     wb_motor_set_velocity(wheel_back, 1.66);
+    else if(ds_Left2 > ds_Right1 && ds_Right1 < 300){
+     wb_motor_set_velocity(wheel_left, 0);
+     wb_motor_set_velocity(wheel_right, 6.66);
+     wb_motor_set_velocity(wheel_back, -6.66);
     }
   }
 
