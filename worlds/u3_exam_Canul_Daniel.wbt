@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9793407048550031 0.19928852469459352 0.03429092794250625 5.9353425039700305
-  position 0.22138470288749826 1.0179174099706507 2.335972087532274
+  orientation 0.9768010153545926 0.2114000932533236 0.03420200249580231 5.954904656029627
+  position 0.0792531297298088 1.547918034034731 4.012930887293751
 }
 TexturedBackground {
 }
@@ -761,6 +761,57 @@ Solid {
       }
     }
   ]
+  boundingObject USE BOX
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.5999999999999996 0.25 1.1300000000000008
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0 0
+      }
+      geometry DEF BOX Box {
+        size 0.19999999999999998 0.5 0.2
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE BOX
+  physics Physics {
+  }
+}
+Solid {
+  translation 1.1400000000000001 0.4 0.7500000000000004
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3058823529411765 0.6039215686274509 0.023529411764705882
+      }
+      geometry DEF BOX Box {
+        size 0.19999999999999998 0.7999999999999999 0.2
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE BOX
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.5099999999999991 0.4 -1.2700000000000007
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3058823529411765 0.6039215686274509 0.023529411764705882
+      }
+      geometry DEF BOX Box {
+        size 0.19999999999999998 0.7999999999999999 0.2
+      }
+    }
+  ]
+  name "solid(3)"
   boundingObject USE BOX
   physics Physics {
   }
