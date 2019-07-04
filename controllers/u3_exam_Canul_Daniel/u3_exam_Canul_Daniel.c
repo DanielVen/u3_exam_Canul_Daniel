@@ -85,6 +85,15 @@ int main(int argc, char **argv)
    * Perform simulation steps of TIME_STEP milliseconds
    * and leave the loop when the simulation is over
    */
+   printf("Left arrow to move linearly to the left\n");
+   printf("Right arrow to move linearly to the Right\n");
+   printf("UP arrow to move Forward linearly\n");
+   printf("DOWN arrow to move Backward linearly\n");
+   printf("A key to turn 45° to the left\n");
+   printf("S key to turn 45° to the right\n");
+   printf("G key to set the automatic mode\n");
+   printf("W key to set the manual mode\n");
+   
    void manual(){
 
         //Distance Sensor Read
@@ -95,13 +104,13 @@ int main(int argc, char **argv)
         Enco2 = wb_position_sensor_get_value(Encoder2);
         Enco3 = wb_position_sensor_get_value(Encoder3);
 
-        printf("distance_right: %lf\r\n", ds_Right1);
-        printf("distance_left: %lf\r\n", ds_Left2);
+        //printf("distance_right: %lf\r\n", ds_Right1);
+        //printf("distance_left: %lf\r\n", ds_Left2);
 
-        printf("Encoder1: %lf\r\n", Enco1);
-        printf("Encoder2: %lf\r\n", Enco2);
-        printf("Encoder3: %lf\r\n", Enco3);
-        printf("Comparador: %lf\n",compare );
+        //printf("Encoder1: %lf\r\n", Enco1);
+        //printf("Encoder2: %lf\r\n", Enco2);
+        //printf("Encoder3: %lf\r\n", Enco3);
+        //printf("Comparador: %lf\n",compare );
         // look for obsctacles
         //bool right_obst = dist_right <= OBSTACLE_DIST;
        // bool left_obst = dist_left <= OBSTACLE_DIST;
@@ -111,26 +120,26 @@ int main(int argc, char **argv)
 
         if(pressed_key == WB_KEYBOARD_UP){
 
-          wb_motor_set_velocity(wheel_left, 6.36);
-          wb_motor_set_velocity(wheel_right, -6.36);
+          wb_motor_set_velocity(wheel_left, 5);
+          wb_motor_set_velocity(wheel_right, -5);
           wb_motor_set_velocity(wheel_back, 0);
         }
         else if(pressed_key == WB_KEYBOARD_DOWN){
-          wb_motor_set_velocity(wheel_left, -6.36);
-          wb_motor_set_velocity(wheel_right, 6.36);
+          wb_motor_set_velocity(wheel_left, -5);
+          wb_motor_set_velocity(wheel_right, 5);
           wb_motor_set_velocity(wheel_back, 0);
 
         }
         else if(pressed_key == WB_KEYBOARD_LEFT){
           wb_motor_set_velocity(wheel_left, 0);
-          wb_motor_set_velocity(wheel_right, -6.36);
-          wb_motor_set_velocity(wheel_back, 6.36);
+          wb_motor_set_velocity(wheel_right, -5);
+          wb_motor_set_velocity(wheel_back, 5);
 
         }
         else if(pressed_key == WB_KEYBOARD_RIGHT){
           wb_motor_set_velocity(wheel_left, 0);
-          wb_motor_set_velocity(wheel_right, 6.36);
-          wb_motor_set_velocity(wheel_back, -6.36);
+          wb_motor_set_velocity(wheel_right, 5);
+          wb_motor_set_velocity(wheel_back, -5);
 
 
         }
@@ -142,9 +151,9 @@ int main(int argc, char **argv)
         else if(turn_left == 1){
 
           if(Enco1 <= compare){
-          wb_motor_set_velocity(wheel_left, 6.36);
-          wb_motor_set_velocity(wheel_right, 6.36);
-          wb_motor_set_velocity(wheel_back, 6.36);
+          wb_motor_set_velocity(wheel_left, 5);
+          wb_motor_set_velocity(wheel_right,5);
+          wb_motor_set_velocity(wheel_back, 5);
         }
         else{
           wb_motor_set_velocity(wheel_left, 0);
@@ -163,9 +172,9 @@ int main(int argc, char **argv)
          else if(turn_right == 1){
 
           if(Enco1 >= compare){
-          wb_motor_set_velocity(wheel_left, -6.36);
-          wb_motor_set_velocity(wheel_right,-6.36);
-          wb_motor_set_velocity(wheel_back, -6.36);
+          wb_motor_set_velocity(wheel_left, -5);
+          wb_motor_set_velocity(wheel_right,-5);
+          wb_motor_set_velocity(wheel_back, -5);
         }
         else{
           wb_motor_set_velocity(wheel_left, 0);
@@ -196,28 +205,28 @@ int main(int argc, char **argv)
     printf("distance_right: %lf\r\n",ds_Right1);
     printf("distance_left: %lf\r\n", ds_Left2);
 
-  //  printf("Encoder1: %lf\r\n", Enco1);
-  //  printf("Encoder2: %lf\r\n", Enco2);
-  //  printf("Encoder3: %lf\r\n", Enco3);
+    printf("Encoder1: %lf\r\n", Enco1);
+    printf("Encoder2: %lf\r\n", Enco2);
+    printf("Encoder3: %lf\r\n", Enco3);
   //  printf("Comparador: %lf\n",compare );
   // Look for obsctacles
   // bool right_obst = dist_right <= OBSTACLE_DIST;
   // bool left_obst = dist_left <= OBSTACLE_DIST;
 
-    wb_motor_set_velocity(wheel_left,  6.36);
-    wb_motor_set_velocity(wheel_right, -6.36);
+    wb_motor_set_velocity(wheel_left,  1.66);
+    wb_motor_set_velocity(wheel_right, -1.66);
     wb_motor_set_velocity(wheel_back, 0);
 
     if(ds_Left2 < ds_Right1 && ds_Left2 < 200){
 
-     wb_motor_set_velocity(wheel_left, 6.36);
+     wb_motor_set_velocity(wheel_left, 1.66);
      wb_motor_set_velocity(wheel_right, 0);
-     wb_motor_set_velocity(wheel_back, -6.36);
+     wb_motor_set_velocity(wheel_back, -1.66);
     }
     else if(ds_Left2 > ds_Right1 && ds_Right1 < 200){
-     wb_motor_set_velocity(wheel_left, -6.36);
+     wb_motor_set_velocity(wheel_left, -1.66);
      wb_motor_set_velocity(wheel_right, 0);
-     wb_motor_set_velocity(wheel_back, 6.36);
+     wb_motor_set_velocity(wheel_back, 1.66);
     }
   }
 
@@ -235,21 +244,21 @@ int main(int argc, char **argv)
      *  double val = wb_distance_sensor_get_value(my_sensor);
      */
      //Distance sensor read
-    ds_Right1 = wb_distance_sensor_get_value(dist_sensorR1);
-    printf("First Distance sensor %lf\r\n", ds_Right1);
+    //ds_Right1 = wb_distance_sensor_get_value(dist_sensorR1);
+    //printf("First Distance sensor %lf\r\n", ds_Right1);
 
-    ds_Left2 = wb_distance_sensor_get_value(dist_sensorL2);
-    printf("Second Distance sensor %lf\r\n", ds_Left2);
+    //ds_Left2 = wb_distance_sensor_get_value(dist_sensorL2);
+    //printf("Second Distance sensor %lf\r\n", ds_Left2);
 
     //Position Sensor read
-    Enco1 = wb_position_sensor_get_value(Encoder1);
-    printf("Encoder 1 value: %f\r\n", Enco1);
+    //Enco1 = wb_position_sensor_get_value(Encoder1);
+    //printf("Encoder 1 value: %f\r\n", Enco1);
 
-    Enco2 = wb_position_sensor_get_value(Encoder2);
-    printf("Encoder 2 value: %lf\r\n", Enco2);
+    //Enco2 = wb_position_sensor_get_value(Encoder2);
+    //printf("Encoder 2 value: %lf\r\n", Enco2);
 
-    Enco3 = wb_position_sensor_get_value(Encoder3);
-    printf("Encoder 3 value: %lf\r\n", Enco3);
+    //Enco3 = wb_position_sensor_get_value(Encoder3);
+    //printf("Encoder 3 value: %lf\r\n", Enco3);
 
     /* Process sensor data here */
     pressed_key=wb_keyboard_get_key();
@@ -268,8 +277,8 @@ int main(int argc, char **argv)
        g = 1;
        w = 0;
      }
-     printf("W: %i   ",w);
-     printf("G: %i\n",g);
+     //printf("W: %i   ",w);
+    // printf("G: %i\n",g);
 
      if(w == 1)
      manual();

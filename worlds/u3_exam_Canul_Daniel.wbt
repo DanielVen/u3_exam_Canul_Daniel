@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9871992290655199 0.1575700694979513 0.02468512367507827 5.968424763880174
-  position 0.11761989045394748 1.6977449324010228 4.441734946676655
+  orientation 0.9983198452902803 0.05229077637961326 0.024963197014971752 5.391080748035107
+  position 0.552126871155076 4.46377090364519 3.737880902506268
 }
 TexturedBackground {
 }
@@ -750,7 +750,7 @@ DEF OMNI_WHEELS Robot {
   controller "u3_exam_Canul_Daniel"
 }
 Solid {
-  translation 1 0.25 0
+  translation 0.36999999999999944 0.25 -0.019999999999999997
   children [
     Shape {
       appearance PBRAppearance {
@@ -766,7 +766,7 @@ Solid {
   }
 }
 Solid {
-  translation 0.5999999999999996 0.25 1.360000000000001
+  translation 1.2800000000000002 0.25 0.38
   children [
     Shape {
       appearance PBRAppearance {
@@ -783,7 +783,7 @@ Solid {
   }
 }
 Solid {
-  translation 1.1400000000000001 0.4 0.7500000000000004
+  translation 0.8299999999999998 0.4 0.9000000000000006
   children [
     Shape {
       appearance PBRAppearance {
@@ -800,7 +800,7 @@ Solid {
   }
 }
 Solid {
-  translation 0.5099999999999991 0.4 -1.2700000000000007
+  translation 1.7799999999999998 0.4 1.0300000000000002
   children [
     Shape {
       appearance PBRAppearance {
@@ -817,7 +817,7 @@ Solid {
   }
 }
 Solid {
-  translation 1.05 0.25 -0.6800000000000003
+  translation -0.5500000000000005 0.25 -0.6800000000000003
   children [
     Shape {
       appearance PBRAppearance {
