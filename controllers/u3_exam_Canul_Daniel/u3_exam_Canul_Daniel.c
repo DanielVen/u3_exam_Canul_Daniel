@@ -10,27 +10,26 @@
  * You may need to add include files like <webots/distance_sensor.h> or
  * <webots/differential_wheels.h>, etc.
  */
-#include <webots/robot.h>
-#include <webots/motor.h>
-#include <webots/keyboard.h>
-#include <webots/distance_sensor.h>
-#include <webots/position_sensor.h>
+ #include <webots/robot.h>
+ #include <webots/motor.h>
+ #include <webots/keyboard.h>
+ #include <webots/distance_sensor.h>
+ #include <webots/position_sensor.h>
 
-#include <stdio.h>
+ #include <stdio.h>
 /*
  * You may want to add macros here.
  */
-#define TIME_STEP 64
+ #define TIME_STEP 64
 
-#define PI 3.1416
-#define DIST_OBSTACLE 20.0
+ #define PI 3.1416
+ #define DIST_OBSTACLE 20.0
 /*
  * This is the main program.
  * The arguments of the main function can be specified by the
  * "controllerArgs" field of the Robot node
  */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
   /* necessary to initialize webots stuff */
   wb_robot_init();
 
@@ -118,81 +117,78 @@ int main(int argc, char **argv)
 
 
 
-        if(pressed_key == WB_KEYBOARD_UP){
+      if(pressed_key == WB_KEYBOARD_UP){
 
           wb_motor_set_velocity(wheel_left, 5);
           wb_motor_set_velocity(wheel_right, -5);
           wb_motor_set_velocity(wheel_back, 0);
-        }
-        else if(pressed_key == WB_KEYBOARD_DOWN){
+      }
+      else if(pressed_key == WB_KEYBOARD_DOWN){
           wb_motor_set_velocity(wheel_left, -5);
           wb_motor_set_velocity(wheel_right, 5);
           wb_motor_set_velocity(wheel_back, 0);
 
-        }
-        else if(pressed_key == WB_KEYBOARD_LEFT){
+      }
+      else if(pressed_key == WB_KEYBOARD_LEFT){
           wb_motor_set_velocity(wheel_left, 0);
           wb_motor_set_velocity(wheel_right, -5);
           wb_motor_set_velocity(wheel_back, 5);
 
-        }
-        else if(pressed_key == WB_KEYBOARD_RIGHT){
+      }
+      else if(pressed_key == WB_KEYBOARD_RIGHT){
           wb_motor_set_velocity(wheel_left, 0);
           wb_motor_set_velocity(wheel_right, 5);
           wb_motor_set_velocity(wheel_back, -5);
 
-
-        }
-        else if(pressed_key == 'S' ){
+      }
+      else if(pressed_key == 'S' ){
           compare = Enco1 + 0.785398;
           turn_left = 1;
-        }
+      }
 
-        else if(turn_left == 1){
+      else if(turn_left == 1){
 
           if(Enco1 <= compare){
-          wb_motor_set_velocity(wheel_left, 5);
-          wb_motor_set_velocity(wheel_right,5);
-          wb_motor_set_velocity(wheel_back, 5);
-        }
-        else{
-          wb_motor_set_velocity(wheel_left, 0);
-          wb_motor_set_velocity(wheel_right, 0);
-          wb_motor_set_velocity(wheel_back, 0);
-          turn_left = 0;
-        }
+           wb_motor_set_velocity(wheel_left, 5);
+           wb_motor_set_velocity(wheel_right,5);
+           wb_motor_set_velocity(wheel_back, 5);
+          }
+          else{
+           wb_motor_set_velocity(wheel_left, 0);
+           wb_motor_set_velocity(wheel_right, 0);
+           wb_motor_set_velocity(wheel_back, 0);
+           turn_left = 0;
+          }
 
       }
 
-        else if(pressed_key == 'A' ){
-        compare = Enco1 - 0.785398;
-        turn_right = 1;
-
-        }
-         else if(turn_right == 1){
-
+      else if(pressed_key == 'A' ){
+          compare = Enco1 - 0.785398;
+          turn_right = 1;
+      }
+         
+      else if(turn_right == 1){
           if(Enco1 >= compare){
-          wb_motor_set_velocity(wheel_left, -5);
-          wb_motor_set_velocity(wheel_right,-5);
-          wb_motor_set_velocity(wheel_back, -5);
-        }
-        else{
-          wb_motor_set_velocity(wheel_left, 0);
-          wb_motor_set_velocity(wheel_right, 0);
-          wb_motor_set_velocity(wheel_back, 0);
-          turn_right = 0;
-        }
+           wb_motor_set_velocity(wheel_left, -5);
+           wb_motor_set_velocity(wheel_right,-5);
+           wb_motor_set_velocity(wheel_back, -5);
+          }
+          else{
+           wb_motor_set_velocity(wheel_left, 0);
+           wb_motor_set_velocity(wheel_right, 0);
+           wb_motor_set_velocity(wheel_back, 0);
+           turn_right = 0;
+          }
 
-        }
-        else{
-          wb_motor_set_velocity(wheel_left, 0);
-          wb_motor_set_velocity(wheel_right, 0);
-          wb_motor_set_velocity(wheel_back, 0);
-        }
       }
+      else{
+        wb_motor_set_velocity(wheel_left, 0);
+        wb_motor_set_velocity(wheel_right, 0);
+        wb_motor_set_velocity(wheel_back, 0);
+      }
+   }
 
-  void automatico()
-  {
+  void automatico(){
 
     //Distance Sensor Read
     ds_Right1 = wb_distance_sensor_get_value(dist_sensorR1);
@@ -208,24 +204,24 @@ int main(int argc, char **argv)
     printf("Encoder1: %lf\r\n", Enco1);
     printf("Encoder2: %lf\r\n", Enco2);
     printf("Encoder3: %lf\r\n", Enco3);
-  //  printf("Comparador: %lf\n",compare );
-  // Look for obsctacles
-  // bool right_obst = dist_right <= OBSTACLE_DIST;
-  // bool left_obst = dist_left <= OBSTACLE_DIST;
+    // printf("Comparador: %lf\n",compare );
+    // Look for obsctacles
+    // bool right_obst = dist_right <= OBSTACLE_DIST;
+    // bool left_obst = dist_left <= OBSTACLE_DIST;
 
     wb_motor_set_velocity(wheel_left,  6.66);
     wb_motor_set_velocity(wheel_right, -6.66);
     wb_motor_set_velocity(wheel_back, 0);
 
-    if(ds_Left2 < ds_Right1 && ds_Left2 < 300){
+    if(ds_Left2 < ds_Right1 && ds_Left2 < 400){
 
-     wb_motor_set_velocity(wheel_left, 0);
-     wb_motor_set_velocity(wheel_right,-6.66);
+     wb_motor_set_velocity(wheel_left, 6.66);
+     wb_motor_set_velocity(wheel_right,6.66);
      wb_motor_set_velocity(wheel_back, 6.66);
     }
-    else if(ds_Left2 > ds_Right1 && ds_Right1 < 300){
-     wb_motor_set_velocity(wheel_left, 0);
-     wb_motor_set_velocity(wheel_right, 6.66);
+    else if(ds_Left2 > ds_Right1 && ds_Right1 < 400){
+     wb_motor_set_velocity(wheel_left, -6.66);
+     wb_motor_set_velocity(wheel_right, -6.66);
      wb_motor_set_velocity(wheel_back, -6.66);
     }
   }
@@ -236,7 +232,7 @@ int main(int argc, char **argv)
 
 
 
-  while (wb_robot_step(TIME_STEP) != -1) {
+  while (wb_robot_step(TIME_STEP) != -1){
 
     /*
      * Read the sensors :
@@ -266,14 +262,12 @@ int main(int argc, char **argv)
      * Enter here functions to send actuator commands, like:
      * wb_differential_wheels_set_speed(100.0,100.0);
      */
-     if(pressed_key == 'W')
-     {
+     if(pressed_key == 'W'){
        w = 1;
        g = 0;
      }
 
-     else if (pressed_key == 'G')
-     {
+     else if (pressed_key == 'G'){
        g = 1;
        w = 0;
      }
@@ -285,7 +279,7 @@ int main(int argc, char **argv)
 
      if(g == 1)
      automatico();
-     };
+  };
 
   /* Enter your cleanup code here */
 
